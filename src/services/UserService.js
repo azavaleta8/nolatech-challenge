@@ -2,7 +2,6 @@ const User = require('../models/User');
 const { use } = require('../routes/userRoutes');
 
 class UserService {
-
 	async registerUser(userData) {
 		const user = await User.create(userData);
 		return this.sanitizeUser(user);
@@ -10,7 +9,7 @@ class UserService {
 
 	async getAllUsers() {
 		const users = await User.find({}).select('-password');
-        return users.map(user => this.sanitizeUser(user))
+		return users.map((user) => this.sanitizeUser(user));
 	}
 
 	async getUserById(userId) {

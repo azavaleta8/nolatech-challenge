@@ -23,7 +23,7 @@ const createApp = () => {
 
 	// Routes
 	app.use('/api', healthCheckRouter);
-    app.use('/api/users', userRoutes);
+	app.use('/api/users', userRoutes);
 
 	// Root route
 	app.get('/', (req, res) => {
