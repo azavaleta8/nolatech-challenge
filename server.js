@@ -31,7 +31,7 @@ app.use((err, req, res, next) => {
 // Variables de entorno
 const NODE_ENV = process.env.NODE_ENV || 'dev';
 const PORT = process.env.PORT || 3000;
-const HOST = process.env.HOST || 'localhost';
+const HOST = process.env.RENDER_EXTERNAL_URL || 'localhost';
 const MONGODB_URI = process.env.MONGODB_URI;
 
 // Función para iniciar el servidor
