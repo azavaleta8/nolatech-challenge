@@ -36,7 +36,7 @@ const startServer = async () => {
 
 		// Run Server
 		app.listen(PORT, () => {
-			if (NODE_ENV == 'production') {
+			if (NODE_ENV === 'production') {
 				console.log(`Server (${NODE_ENV}) running on ${HOST}`);
 				console.log(`Swagger docs are available at ${HOST}/api-docs`);
 			} else {
