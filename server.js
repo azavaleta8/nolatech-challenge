@@ -36,8 +36,16 @@ const startServer = async () => {
 
 		// Run Server
 		app.listen(PORT, () => {
-			console.log(`Server (${NODE_ENV}) running on ${HOST}:${PORT}`);
-			console.log(`Swagger docs are available at ${HOST}:${PORT}/api-docs`);
+
+			if(NODE_ENV == "production"){
+				console.log(`Server (${NODE_ENV}) running on ${HOST}`);
+				console.log(`Swagger docs are available at ${HOST}/api-docs`);
+
+			}else{
+				console.log(`Server (${NODE_ENV}) running on http://${HOST}:${PORT}`);
+				console.log(`Swagger docs are available at http://${HOST}:${PORT}/api-docs`);
+			}
+			
 		});
 	} catch (error) {
 		console.error('Error initializing the server:', error);
