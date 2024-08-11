@@ -7,6 +7,7 @@ const swaggerOptions = require('./swagger');
 const { notFoundMiddleware, errorHandlerMiddleware } = require('../middlewares/errorHandle');
 
 const healthCheckRouter = require('../routes/healthCheckRouter');
+const userRoutes = require('../routes/userRoutes');
 
 const createApp = () => {
 	const app = express();
@@ -22,6 +23,7 @@ const createApp = () => {
 
 	// Routes
 	app.use('/api', healthCheckRouter);
+    app.use('/api/users', userRoutes);
 
 	// Root route
 	app.get('/', (req, res) => {
