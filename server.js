@@ -2,10 +2,10 @@ const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const createApp = require('./src/config/app');
 
-// Cargar variables de entorno
+// ENV
 dotenv.config();
 
-// Configuración de Mongoose
+// Mongoose Conf
 mongoose.set('strictQuery', false);
 
 // Variables de entorno
@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 3000;
 const HOST = process.env.RENDER_EXTERNAL_URL || 'localhost';
 const { MONGODB_URI } = process.env;
 
-// Función para conectar a MongoDB
+// Funcion for connect to DB
 const connectToDatabase = async () => {
 	try {
 		await mongoose.connect(MONGODB_URI, {
@@ -28,16 +28,16 @@ const connectToDatabase = async () => {
 	}
 };
 
-// Función para iniciar el servidor
+// Funcion for starting the server
 const startServer = async () => {
 	try {
 		await connectToDatabase();
 		const app = createApp();
 
-		// Iniciar el servidor
+		// Run Server
 		app.listen(PORT, () => {
-			console.log(`Server (${NODE_ENV}) running on http://${HOST}:${PORT}`);
-			console.log(`Swagger docs are available at http://${HOST}:${PORT}/api-docs`);
+			console.log(`Server (${NODE_ENV}) running on ${HOST}:${PORT}`);
+			console.log(`Swagger docs are available at ${HOST}:${PORT}/api-docs`);
 		});
 	} catch (error) {
 		console.error('Error initializing the server:', error);
@@ -45,5 +45,5 @@ const startServer = async () => {
 	}
 };
 
-// Iniciar el servidor
+//Start Server
 startServer();
