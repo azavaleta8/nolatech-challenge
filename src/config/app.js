@@ -4,6 +4,9 @@ const cors = require('cors');
 const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 const swaggerOptions = require('./swagger');
+const { notFoundMiddleware, errorHandlerMiddleware } = require('../middlewares/errorHandle');
+
+const healthCheckRouter = require('../routes/healthCheckRouter');
 
 const createApp = () => {
 	const app = express();
@@ -13,20 +16,21 @@ const createApp = () => {
 	app.use(morgan('dev'));
 	app.use(cors());
 
-	// Configuración de Swagger
+	// Swagger Config
 	const swaggerDocs = swaggerJsDoc(swaggerOptions);
 	app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
-	// Rutas básicas (las expandiremos más adelante)
+	// Routes
+	app.use('/api', healthCheckRouter);
+
+	// Root route
 	app.get('/', (req, res) => {
-		res.json({ message: 'API de Evaluación 360 funcionando' });
+		res.json({ message: 'Nolatech Challnege API is running' });
 	});
 
-	// Manejo de errores global
-	app.use((err, req, res, next) => {
-		console.error(err.stack);
-		res.status(500).json({ message: 'Ocurrió un error en el servidor' });
-	});
+	// Error handling middlewares
+	app.use(notFoundMiddleware);
+	app.use(errorHandlerMiddleware);
 
 	return app;
 };

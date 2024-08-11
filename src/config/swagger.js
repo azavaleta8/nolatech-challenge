@@ -2,7 +2,7 @@ const swaggerOptions = {
 	definition: {
 		openapi: '3.0.0',
 		info: {
-			title: 'To Do API',
+			title: 'Nolatech Challenge API',
 			version: '1.0.0',
 			description: 'API documentation',
 		},
@@ -16,7 +16,7 @@ const swaggerOptions = {
 			},
 		},
 	},
-	apis: ['./src/api/**/*.js'], // Asegúrate de que esta ruta apunte a tus archivos de rutas
+	apis: ['./src/routes/*.js'], // Asegúrate de que esta ruta apunte a tus archivos de rutas
 	persistAuthorization: true,
 };
 
