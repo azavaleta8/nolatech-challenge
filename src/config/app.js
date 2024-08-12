@@ -9,6 +9,7 @@ const { notFoundMiddleware, errorHandlerMiddleware } = require('../middlewares/e
 const healthCheckRouter = require('../routes/healthCheckRouter');
 const userRoutes = require('../routes/userRoutes');
 const employeeRoutes = require('../routes/employeeRoutes');
+const questionRoutes = require("../routes/questionRoutes");
 
 const createApp = () => {
 	const app = express();
@@ -26,6 +27,7 @@ const createApp = () => {
 	app.use('/api', healthCheckRouter);
 	app.use('/api/users', userRoutes);
 	app.use('/api/employees', employeeRoutes);
+	app.use('/api/questions', questionRoutes);
 
 	// Root route
 	app.get('/', (req, res) => {
