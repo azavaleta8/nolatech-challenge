@@ -11,6 +11,7 @@ const userRoutes = require('../routes/userRoutes');
 const employeeRoutes = require('../routes/employeeRoutes');
 const questionRoutes = require('../routes/questionRoutes');
 const evaluationRoutes = require('../routes/evaluationRoutes');
+const reportRoutes = require('../routes/reportRoutes');
 
 const createApp = () => {
 	const app = express();
@@ -30,6 +31,7 @@ const createApp = () => {
 	app.use('/api/employees', employeeRoutes);
 	app.use('/api/questions', questionRoutes);
 	app.use('/api/evaluations', evaluationRoutes);
+	app.use('/api/reports', reportRoutes);
 
 	// Root route
 	app.get('/', (req, res) => {
