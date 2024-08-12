@@ -17,6 +17,9 @@ const router = express.Router();
  *         - period
  *         - questions
  *       properties:
+ *         id:
+ *           type: string
+ *           format: uuid
  *         employeeId:
  *           type: string
  *           description: The ID of the employee being evaluated
