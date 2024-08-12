@@ -9,7 +9,7 @@ const { notFoundMiddleware, errorHandlerMiddleware } = require('../middlewares/e
 const healthCheckRouter = require('../routes/healthCheckRouter');
 const userRoutes = require('../routes/userRoutes');
 const employeeRoutes = require('../routes/employeeRoutes');
-const questionRoutes = require("../routes/questionRoutes");
+const questionRoutes = require('../routes/questionRoutes');
 
 const createApp = () => {
 	const app = express();
