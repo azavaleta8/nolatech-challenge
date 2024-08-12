@@ -7,6 +7,64 @@ const router = express.Router();
 
 /**
  * @swagger
+ * components:
+ *   schemas:
+ *     EmployeeInput:
+ *       type: object
+ *       required:
+ *         - email
+ *         - password
+ *         - firstName
+ *         - lastName
+ *         - position
+ *         - department
+ *         - hireDate
+ *         - managerId
+ *       properties:
+ *         email:
+ *           type: string
+ *           format: email
+ *         password:
+ *           type: string
+ *           minLength: 6
+ *         firstName:
+ *           type: string
+ *         lastName:
+ *           type: string
+ *         position:
+ *           type: string
+ *         department:
+ *           type: string
+ *         hireDate:
+ *           type: string
+ *           format: date
+ *         managerId:
+ *           type: string
+ *           format: uuid
+ *     EmployeeUpdate:
+ *       type: object
+ *       properties:
+ *         email:
+ *           type: string
+ *           format: email
+ *         firstName:
+ *           type: string
+ *         lastName:
+ *           type: string
+ *         position:
+ *           type: string
+ *         department:
+ *           type: string
+ *         hireDate:
+ *           type: string
+ *           format: date
+ *         managerId:
+ *           type: string
+ *           format: uuid
+ */
+
+/**
+ * @swagger
  * /api/employees:
  *   post:
  *     summary: Create a new employee
@@ -38,6 +96,12 @@ router.post('/', auth.protect, auth.restrictTo('admin', 'manager'), validateEmpl
  *     responses:
  *       200:
  *         description: List of all employees
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/EmployeeInput'
  */
 router.get('/', auth.protect, employeeController.getAllEmployees);
 
@@ -58,6 +122,10 @@ router.get('/', auth.protect, employeeController.getAllEmployees);
  *     responses:
  *       200:
  *         description: Employee details
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/EmployeeInput'
  *       404:
  *         description: Employee not found
  */
