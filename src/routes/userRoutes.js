@@ -1,11 +1,12 @@
 const express = require('express');
 const userController = require('../controllers/userController');
+const auth = require('../middlewares/auth');
 
 const router = express.Router();
 
 /**
  * @swagger
- * /api/users/register:
+ * /api/users/auth/register:
  *   post:
  *     summary: Register a new user
  *     tags: [Users]
@@ -16,27 +17,30 @@ const router = express.Router();
  *           schema:
  *             type: object
  *             required:
- *               - username
  *               - email
  *               - password
+ *               - role
  *             properties:
  *               email:
  *                 type: string
+ *                 example: test@test.com
  *               password:
  *                 type: string
+ *                 example: 123456
  *               role:
  *                 type: string
+ *                 example: admin
  *     responses:
  *       201:
  *         description: User created successfully
  *       400:
  *         description: Bad request
  */
-router.post('/register', userController.register);
+router.post('/auth/register', userController.register);
 
 /**
  * @swagger
- * /api/users/login:
+ * /api/users/auth/login:
  *   post:
  *     summary: Login user
  *     tags: [Users]
@@ -52,15 +56,17 @@ router.post('/register', userController.register);
  *             properties:
  *               email:
  *                 type: string
+ *                 example: test@test.com
  *               password:
  *                 type: string
+ *                 example: 123456
  *     responses:
  *       200:
  *         description: Login successful
  *       401:
  *         description: Invalid credentials
  */
-router.post('/login', userController.login);
+router.post('/auth/login', userController.login);
 
 /**
  * @swagger
@@ -78,7 +84,7 @@ router.post('/login', userController.login);
  *       403:
  *         description: Forbidden
  */
-router.get('/', userController.getAllUsers);
+router.get('/', auth.protect, auth.restrictTo('admin'), userController.getAllUsers);
 
 /**
  * @swagger
@@ -102,6 +108,6 @@ router.get('/', userController.getAllUsers);
  *       404:
  *         description: User not found
  */
-router.get('/:id', userController.getUserById);
+router.get('/:id', auth.protect, userController.getUserById);
 
 module.exports = router;
