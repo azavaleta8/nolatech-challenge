@@ -20,7 +20,7 @@ let questionId;
 beforeAll(async () => {
 	mongoServer = await MongoMemoryServer.create();
 	const mongoUri = mongoServer.getUri();
-    mongoose.set('strictQuery', false);
+	mongoose.set('strictQuery', false);
 	await mongoose.connect(mongoUri);
 	app = await createApp();
 });
@@ -195,7 +195,7 @@ describe('Evaluation Routes', () => {
 				.put(`/api/evaluations/${evaluation.id}`)
 				.set('Authorization', `Bearer ${adminToken}`)
 				.send({
-                    employeeId,
+					employeeId,
 				    evaluatorId,
 					period: '2023 Q3',
 					questions: [{ questionId, answer: 2 }],

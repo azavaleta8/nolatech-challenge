@@ -12,13 +12,12 @@ function sanitizeEmployee(employee) {
 
 function sanitizeEvaluation(evaluation) {
 	const {
-		_id, employeeId, evaluatorId, period, status, questions, score
+		_id, employeeId, evaluatorId, period, status, questions, score,
 	} = evaluation;
 	return {
-		id: _id, employeeId, evaluatorId, period, status, questions, score
+		id: _id, employeeId, evaluatorId, period, status, questions, score,
 	};
 }
-
 
 const EvaluationService = {
 	async createEvaluation(evaluationData) {
