@@ -21,6 +21,9 @@ const router = express.Router();
  *         - hireDate
  *         - managerId
  *       properties:
+ *         id:
+ *           type: string
+ *           format: uuid
  *         email:
  *           type: string
  *           format: email

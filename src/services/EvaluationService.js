@@ -1,23 +1,42 @@
 const Evaluation = require('../models/Evaluation');
 const Question = require('../models/Question');
 
+function sanitizeEmployee(employee) {
+	const {
+		_id, email, role, firstName, lastName, position, department, hireDate, managerId,
+	} = employee;
+	return {
+		id: _id, email, role, firstName, lastName, position, department, hireDate, managerId,
+	};
+}
+
+function sanitizeEvaluation(evaluation) {
+	const {
+		_id, employeeId, evaluatorId, period, status, questions, score
+	} = evaluation;
+	return {
+		id: _id, employeeId, evaluatorId, period, status, questions, score
+	};
+}
+
+
 const EvaluationService = {
 	async createEvaluation(evaluationData) {
 		const evaluation = await Evaluation.create(evaluationData);
-		return evaluation;
+		return sanitizeEvaluation(evaluation);
 	},
 
 	async getAllEvaluations() {
-		const evaluations = await Evaluation.find().populate('employeeId evaluatorId');
-		return evaluations;
+		const evaluations = await Evaluation.find();
+		return evaluations.map(sanitizeEvaluation);
 	},
 
 	async getEvaluationById(id) {
-		const evaluation = await Evaluation.findById(id).populate('employeeId evaluatorId');
+		const evaluation = await Evaluation.findById(id);
 		if (!evaluation) {
 			throw new Error('Evaluation not found');
 		}
-		return evaluation;
+		return sanitizeEvaluation(evaluation);
 	},
 
 	async updateEvaluation(id, updateData) {
@@ -25,7 +44,7 @@ const EvaluationService = {
 		if (!evaluation) {
 			throw new Error('Evaluation not found');
 		}
-		return evaluation;
+		return sanitizeEvaluation(evaluation);
 	},
 
 	async deleteEvaluation(id) {
@@ -56,7 +75,7 @@ const EvaluationService = {
 		evaluation.status = 'completed';
 		await evaluation.save();
 
-		return evaluation;
+		return sanitizeEvaluation(evaluation);
 	},
 };
 

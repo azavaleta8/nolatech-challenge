@@ -44,6 +44,34 @@ const router = express.Router();
  *         score:
  *           type: number
  *           description: The overall score of the evaluation
+ *     EvaluationUpdate:
+ *       type: object
+ *       required:
+ *         - employeeId
+ *         - evaluatorId
+ *         - period
+ *         - questions
+ *       properties:
+ *         employeeId:
+ *           type: string
+ *           description: The ID of the employee being evaluated
+ *         evaluatorId:
+ *           type: string
+ *           description: The ID of the user doing the evaluation
+ *         period:
+ *           type: string
+ *           description: The evaluation period
+ *         questions:
+ *           type: array
+ *           items:
+ *             type: object
+ *             properties:
+ *               questionId:
+ *                 type: string
+ *                 description: The ID of the question
+ *               answer:
+ *                 type: number
+ *                 description: The index of the user's answer
  */
 
 /**
@@ -59,7 +87,7 @@ const router = express.Router();
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Evaluation'
+ *             $ref: '#/components/schemas/EvaluationUpdate'
  *     responses:
  *       201:
  *         description: Evaluation created successfully
@@ -133,7 +161,7 @@ router.get('/:id', auth.protect, auth.restrictTo('admin', 'manager'), validateEv
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Evaluation'
+ *             $ref: '#/components/schemas/EvaluationUpdate'
  *     responses:
  *       200:
  *         description: Evaluation updated successfully

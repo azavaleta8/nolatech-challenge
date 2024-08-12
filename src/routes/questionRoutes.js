@@ -17,6 +17,9 @@ const router = express.Router();
  *         - correctAnswer
  *         - category
  *       properties:
+ *         id:
+ *           type: string
+ *           format: uuid
  *         text:
  *           type: string
  *           description: The text of the question
