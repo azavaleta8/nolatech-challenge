@@ -55,7 +55,7 @@ const EvaluationService = {
 
 		const scorePromises = questions.map(async (questionData) => {
 			const question = await Question.findById(questionData.questionId);
-			return question.correctAnswer === questionData.answers ? 1 : 0;
+			return question.correctAnswer === questionData.answer ? 1 : 0;
 		});
 
 		const scores = await Promise.all(scorePromises);

@@ -55,6 +55,7 @@ const ReportService = {
 				department: employee.department,
 			},
 			evaluations: evaluations.map((evaluation) => ({
+				id: evaluation.id,
 				period: evaluation.period,
 				score: evaluation.score,
 				questions: evaluation.questions.map((q) => ({
