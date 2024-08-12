@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
 function sanitizeUser(user) {
@@ -5,10 +6,23 @@ function sanitizeUser(user) {
 	return { id: _id, email, role };
 }
 
+function generateToken(userId) {
+	return jwt.sign({ userId }, process.env.JWT_SECRET || 'secret', { expiresIn: '1d' });
+}
+
 const UserService = {
 	async registerUser(userData) {
 		const user = await User.create(userData);
 		return sanitizeUser(user);
+	},
+
+	async loginUser(email, password) {
+		const user = await User.findOne({ email });
+		if (!user || !(await user.comparePassword(password))) {
+			throw new Error('Invalid credentials');
+		}
+		const token = generateToken(user.id);
+		return { token };
 	},
 
 	async getAllUsers() {

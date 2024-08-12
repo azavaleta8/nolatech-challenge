@@ -10,6 +10,20 @@ exports.register = async (req, res, next) => {
 	}
 };
 
+exports.login = async (req, res, next) => {
+	try {
+		const { email, password } = req.body;
+		const result = await userService.loginUser(email, password);
+		res.status(StatusCodes.OK).json(result);
+	} catch (error) {
+		if (error.message === 'Invalid credentials') {
+			res.status(StatusCodes.UNAUTHORIZED).json({ message: error.message });
+		} else {
+			next(error);
+		}
+	}
+};
+
 exports.getAllUsers = async (req, res, next) => {
 	try {
 		const users = await userService.getAllUsers();
