@@ -1,6 +1,7 @@
 const express = require('express');
 const userController = require('../controllers/userController');
 const auth = require('../middlewares/auth');
+const { validateRegistration, validateLogin, validateUserId } = require('../validators/userValidation');
 
 const router = express.Router();
 
@@ -35,8 +36,10 @@ const router = express.Router();
  *         description: User created successfully
  *       400:
  *         description: Bad request
+ *       422:
+ *         description: Unprocessable Entity
  */
-router.post('/auth/register', userController.register);
+router.post('/auth/register', validateRegistration, userController.register);
 
 /**
  * @swagger
@@ -65,8 +68,10 @@ router.post('/auth/register', userController.register);
  *         description: Login successful
  *       401:
  *         description: Invalid credentials
+ *       422:
+ *         description: Unprocessable Entity
  */
-router.post('/auth/login', userController.login);
+router.post('/auth/login', validateLogin, userController.login);
 
 /**
  * @swagger
@@ -107,7 +112,9 @@ router.get('/', auth.protect, auth.restrictTo('admin'), userController.getAllUse
  *         description: Unauthorized
  *       404:
  *         description: User not found
+ *       422:
+ *         description: Unprocessable Entity
  */
-router.get('/:id', auth.protect, userController.getUserById);
+router.get('/:id', auth.protect, validateUserId, userController.getUserById);
 
 module.exports = router;
