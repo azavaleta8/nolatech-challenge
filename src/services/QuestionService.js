@@ -1,14 +1,19 @@
 const Question = require('../models/Question');
 
+function sanitizeQuestion(question) {
+	const { _id, category, correctAnswer, options, text } = question;
+	return { id: _id, category, correctAnswer, options, text};
+}
+
 const QuestionService = {
 	async createQuestion(questionData) {
 		const question = await Question.create(questionData);
-		return question;
+		return sanitizeQuestion(question);
 	},
 
 	async getAllQuestions() {
 		const questions = await Question.find();
-		return questions;
+		return questions.map((q) => sanitizeQuestion(q));;
 	},
 
 	async getQuestionById(id) {
@@ -16,7 +21,7 @@ const QuestionService = {
 		if (!question) {
 			throw new Error('Question not found');
 		}
-		return question;
+		return sanitizeQuestion(question);
 	},
 
 	async updateQuestion(id, updateData) {
@@ -24,7 +29,7 @@ const QuestionService = {
 		if (!question) {
 			throw new Error('Question not found');
 		}
-		return question;
+		return sanitizeQuestion(question);
 	},
 
 	async deleteQuestion(id) {
