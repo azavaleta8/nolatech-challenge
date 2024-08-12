@@ -34,6 +34,28 @@ const router = express.Router();
  *         category:
  *           type: string
  *           description: The category of the question
+ *     QuestionInput:
+ *       type: object
+ *       required:
+ *         - text
+ *         - options
+ *         - correctAnswer
+ *         - category
+ *       properties:
+ *         text:
+ *           type: string
+ *           description: The text of the question
+ *         options:
+ *           type: array
+ *           items:
+ *             type: string
+ *           description: An array of possible answers
+ *         correctAnswer:
+ *           type: number
+ *           description: The index of the correct answer in the options array
+ *         category:
+ *           type: string
+ *           description: The category of the question
  */
 
 /**
@@ -49,7 +71,7 @@ const router = express.Router();
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Question'
+ *             $ref: '#/components/schemas/QuestionInput'
  *     responses:
  *       201:
  *         description: Question created successfully
@@ -123,7 +145,7 @@ router.get('/:id', auth.protect, auth.restrictTo('admin', "manager"), validateQu
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Question'
+ *             $ref: '#/components/schemas/QuestionInput'
  *     responses:
  *       200:
  *         description: Question updated successfully

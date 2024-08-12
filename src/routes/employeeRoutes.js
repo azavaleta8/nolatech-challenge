@@ -79,7 +79,7 @@ const router = express.Router();
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/EmployeeInput'
+ *             $ref: '#/components/schemas/EmployeeUpdate'
  *     responses:
  *       201:
  *         description: Employee created successfully
