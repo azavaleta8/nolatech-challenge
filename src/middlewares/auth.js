@@ -13,7 +13,7 @@ exports.protect = async (req, res, next) => {
 			return res.status(StatusCodes.UNAUTHORIZED).json({ message: 'You are not logged in. Please log in to get access.' });
 		}
 
-		const decoded = jwt.verify(token, process.env.JWT_SECRET || "secret");
+		const decoded = jwt.verify(token, process.env.JWT_SECRET || 'secret');
 
 		const currentUser = await User.findById(decoded.userId);
 		if (!currentUser) {
@@ -23,7 +23,7 @@ exports.protect = async (req, res, next) => {
 		req.user = currentUser;
 		return next();
 	} catch (error) {
-        console.log(error)
+		console.log(error);
 		return res.status(StatusCodes.UNAUTHORIZED).json({ message: 'Invalid token. Please log in again.' });
 	}
 };
