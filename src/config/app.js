@@ -5,6 +5,7 @@ const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 const swaggerOptions = require('./swagger');
 const { notFoundMiddleware, errorHandlerMiddleware } = require('../middlewares/errorHandle');
+const { apiLimiter } = require('./rateLimit');
 
 const healthCheckRouter = require('../routes/healthCheckRouter');
 const userRoutes = require('../routes/userRoutes');
@@ -20,6 +21,7 @@ const createApp = () => {
 	app.use(express.json());
 	app.use(morgan('dev'));
 	app.use(cors());
+	app.use(apiLimiter);
 
 	// Swagger Config
 	const swaggerDocs = swaggerJsDoc(swaggerOptions);
