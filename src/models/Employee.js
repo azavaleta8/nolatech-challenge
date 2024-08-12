@@ -46,7 +46,7 @@ const employeeSchema = new mongoose.Schema({
 	managerId: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Employee',
-		required: false,
+		required: true,
 	},
 }, { timestamps: true });
 
