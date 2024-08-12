@@ -1,15 +1,6 @@
 const Evaluation = require('../models/Evaluation');
 const Question = require('../models/Question');
 
-function sanitizeEmployee(employee) {
-	const {
-		_id, email, role, firstName, lastName, position, department, hireDate, managerId,
-	} = employee;
-	return {
-		id: _id, email, role, firstName, lastName, position, department, hireDate, managerId,
-	};
-}
-
 function sanitizeEvaluation(evaluation) {
 	const {
 		_id, employeeId, evaluatorId, period, status, questions, score,
