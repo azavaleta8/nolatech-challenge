@@ -115,6 +115,6 @@ router.get('/', auth.protect, auth.restrictTo('admin'), userController.getAllUse
  *       422:
  *         description: Unprocessable Entity
  */
-router.get('/:id', auth.protect, validateUserId, userController.getUserById);
+router.get('/:id', auth.protect, auth.restrictTo('admin',"manager"), validateUserId, userController.getUserById);
 
 module.exports = router;

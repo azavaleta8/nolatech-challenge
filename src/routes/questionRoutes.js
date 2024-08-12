@@ -76,7 +76,7 @@ router.post('/', auth.protect, auth.restrictTo('admin'), validateQuestion, quest
  *               items:
  *                 $ref: '#/components/schemas/Question'
  */
-router.get('/', auth.protect, questionController.getAllQuestions);
+router.get('/', auth.protect, auth.restrictTo('admin', "manager"), questionController.getAllQuestions);
 
 /**
  * @swagger
@@ -102,7 +102,7 @@ router.get('/', auth.protect, questionController.getAllQuestions);
  *       404:
  *         description: Question not found
  */
-router.get('/:id', auth.protect, validateQuestionId, questionController.getQuestionById);
+router.get('/:id', auth.protect, auth.restrictTo('admin', "manager"), validateQuestionId, questionController.getQuestionById);
 
 /**
  * @swagger

@@ -106,7 +106,7 @@ router.post('/', auth.protect, auth.restrictTo('admin', 'manager'), validateEmpl
  *               items:
  *                 $ref: '#/components/schemas/EmployeeInput'
  */
-router.get('/', auth.protect, employeeController.getAllEmployees);
+router.get('/', auth.protect, auth.restrictTo('admin', 'manager'), employeeController.getAllEmployees);
 
 /**
  * @swagger
