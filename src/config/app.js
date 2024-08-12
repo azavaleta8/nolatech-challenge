@@ -10,6 +10,7 @@ const healthCheckRouter = require('../routes/healthCheckRouter');
 const userRoutes = require('../routes/userRoutes');
 const employeeRoutes = require('../routes/employeeRoutes');
 const questionRoutes = require('../routes/questionRoutes');
+const evaluationRoutes = require('../routes/evaluationRoutes');
 
 const createApp = () => {
 	const app = express();
@@ -28,6 +29,7 @@ const createApp = () => {
 	app.use('/api/users', userRoutes);
 	app.use('/api/employees', employeeRoutes);
 	app.use('/api/questions', questionRoutes);
+	app.use('/api/evaluations', evaluationRoutes);
 
 	// Root route
 	app.get('/', (req, res) => {
