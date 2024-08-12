@@ -194,6 +194,7 @@ Notas sobre permisos:
 - Los endpoints marcados como "Solo admin" estan restringidos exclusivamente a usuarios con rol de administrador.
 - Los endpoints accesibles por "Admin y manager" permiten el acceso a usuarios con roles de administrador o gerente.
 - La autenticacion se realiza mediante tokens JWT, que deben ser incluidos en el encabezado de las solicitudes para los endpoints protegidos.
+- Los reportes solo toman en cuenta evaluaciones que estan completas, es decir evaluacion que pasaron por el endpoint /api/evaluations/:id/submit
 
 ## Buenas Practicas Implementadas
 
@@ -201,3 +202,8 @@ Notas sobre permisos:
 - Implementacion de logging para facilitar el debugging y monitoreo.
 - Uso de ESLint para mantener un estilo de codigo consistente.
 - Implementacion de tests en todos los endpoints para asegurar la calidad del codigo.
+
+## Data dummy
+
+El proyecto esta populado con data dummy para mayor facilidad con las siguientes credenciales:
+`admin@example.com  password123`
