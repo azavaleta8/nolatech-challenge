@@ -1,8 +1,12 @@
 const Question = require('../models/Question');
 
 function sanitizeQuestion(question) {
-	const { _id, category, correctAnswer, options, text } = question;
-	return { id: _id, category, correctAnswer, options, text};
+	const {
+		_id, category, correctAnswer, options, text,
+	} = question;
+	return {
+		id: _id, category, correctAnswer, options, text,
+	};
 }
 
 const QuestionService = {
@@ -13,7 +17,7 @@ const QuestionService = {
 
 	async getAllQuestions() {
 		const questions = await Question.find();
-		return questions.map((q) => sanitizeQuestion(q));;
+		return questions.map((q) => sanitizeQuestion(q));
 	},
 
 	async getQuestionById(id) {
