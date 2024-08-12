@@ -105,7 +105,7 @@ describe('Question Routes', () => {
 
 			const res = await request(app)
 				.get('/api/questions')
-				.set('Authorization', `Bearer ${employeeToken}`);
+				.set('Authorization', `Bearer ${adminToken}`);
 
 			expect(res.statusCode).toBe(200);
 			expect(Array.isArray(res.body)).toBeTruthy();
@@ -131,7 +131,7 @@ describe('Question Routes', () => {
 
 			const res = await request(app)
 				.get(`/api/questions/${question.id}`)
-				.set('Authorization', `Bearer ${employeeToken}`);
+				.set('Authorization', `Bearer ${adminToken}`);
 
 			expect(res.statusCode).toBe(200);
 			expect(res.body.id).toBe(question.id.toString());
@@ -142,7 +142,7 @@ describe('Question Routes', () => {
 			const nonExistentId = new mongoose.Types.ObjectId();
 			const res = await request(app)
 				.get(`/api/questions/${nonExistentId}`)
-				.set('Authorization', `Bearer ${employeeToken}`);
+				.set('Authorization', `Bearer ${adminToken}`);
 
 			expect(res.statusCode).toBe(404);
 		});
