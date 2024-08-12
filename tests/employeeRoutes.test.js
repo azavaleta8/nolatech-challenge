@@ -59,7 +59,7 @@ describe('Employee Routes', () => {
 					position: 'Developer',
 					department: 'IT',
 					hireDate: new Date(),
-					managerId: managerId
+					managerId,
 				});
 
 			expect(res.statusCode).toBe(201);
@@ -81,7 +81,7 @@ describe('Employee Routes', () => {
 					lastName: 'Doe',
 					position: 'Developer',
 					department: 'IT',
-					hireDate: new Date()
+					hireDate: new Date(),
 				});
 
 			expect(res.statusCode).toBe(422);
@@ -89,7 +89,7 @@ describe('Employee Routes', () => {
 		});
 
 		it('should not allow employee creation for non-admin/manager users', async () => {
-            const employee = await Employee.create({
+			const employee = await Employee.create({
 				email: 'employee2@example.com',
 				password: 'password123',
 				role: 'employee',
@@ -98,9 +98,8 @@ describe('Employee Routes', () => {
 				position: 'Manager',
 				department: 'HR',
 				hireDate: new Date(),
-				managerId: managerId
+				managerId,
 			});
-
 
 			const employeeToken = jwt.sign({ userId: employee.id }, process.env.JWT_SECRET || 'secret', { expiresIn: '1d' });
 
@@ -115,7 +114,7 @@ describe('Employee Routes', () => {
 					position: 'Designer',
 					department: 'Design',
 					hireDate: new Date(),
-					managerId: managerId
+					managerId,
 				});
 
 			expect(res.statusCode).toBe(403);
@@ -133,7 +132,7 @@ describe('Employee Routes', () => {
 				position: 'Developer',
 				department: 'IT',
 				hireDate: new Date(),
-				managerId: managerId
+				managerId,
 			});
 
 			const res = await request(app)
@@ -165,7 +164,7 @@ describe('Employee Routes', () => {
 				position: 'Manager',
 				department: 'HR',
 				hireDate: new Date(),
-				managerId: managerId
+				managerId,
 			});
 
 			const res = await request(app)
@@ -199,7 +198,7 @@ describe('Employee Routes', () => {
 				position: 'Tester',
 				department: 'QA',
 				hireDate: new Date(),
-				managerId: managerId
+				managerId,
 			});
 
 			const newManagerId = new mongoose.Types.ObjectId();
@@ -208,13 +207,13 @@ describe('Employee Routes', () => {
 				.put(`/api/employees/${employee.id}`)
 				.set('Authorization', `Bearer ${adminToken}`)
 				.send({
-                    email: 'updateme@example.com',
-                    firstName: 'Updated',
+					email: 'updateme@example.com',
+					firstName: 'Updated',
 					lastName: 'Employee',
 					position: 'Senior Tester',
-                    department: 'QA',
-                    hireDate: new Date(),
-                    managerId: newManagerId
+					department: 'QA',
+					hireDate: new Date(),
+					managerId: newManagerId,
 				});
 
 			expect(res.statusCode).toBe(200);
@@ -234,7 +233,7 @@ describe('Employee Routes', () => {
 				position: 'Junior',
 				department: 'IT',
 				hireDate: new Date(),
-				managerId: managerId
+				managerId,
 			});
 
 			const employeeToken = jwt.sign({ userId: employee.id }, process.env.JWT_SECRET || 'secret', { expiresIn: '1d' });
@@ -243,13 +242,13 @@ describe('Employee Routes', () => {
 				.put(`/api/employees/${employee.id}`)
 				.set('Authorization', `Bearer ${employeeToken}`)
 				.send({
-                    email: 'cannotupdate@example.com',
-                    firstName: 'Tried',
+					email: 'cannotupdate@example.com',
+					firstName: 'Tried',
 					lastName: 'ToUpdate',
-                    position: 'Junior',
-                    department: 'IT',
-                    hireDate: new Date(),
-                    managerId: managerId
+					position: 'Junior',
+					department: 'IT',
+					hireDate: new Date(),
+					managerId,
 				});
 
 			expect(res.statusCode).toBe(403);
@@ -267,7 +266,7 @@ describe('Employee Routes', () => {
 				position: 'Temporary',
 				department: 'Temp',
 				hireDate: new Date(),
-				managerId: managerId
+				managerId,
 			});
 
 			const res = await request(app)
@@ -291,7 +290,7 @@ describe('Employee Routes', () => {
 				position: 'Permanent',
 				department: 'Secure',
 				hireDate: new Date(),
-				managerId: managerId
+				managerId,
 			});
 
 			const res = await request(app)

@@ -11,8 +11,8 @@ function sanitizeEmployee(employee) {
 
 const EmployeeService = {
 	async createEmployee(employeeData) {
-        employeeData.role = "employee"
-		const employee = await Employee.create(employeeData);
+		const newEmployeeData = { ...employeeData, role: 'employee' };
+		const employee = await Employee.create(newEmployeeData);
 		return sanitizeEmployee(employee);
 	},
 

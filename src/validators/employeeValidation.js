@@ -50,5 +50,5 @@ const validateUserId = [
 module.exports = {
 	validateEmployee,
 	validateUserId,
-	validateEmployeeUpdate
+	validateEmployeeUpdate,
 };
