@@ -1,7 +1,7 @@
 const express = require('express');
 const employeeController = require('../controllers/employeeController');
 const auth = require('../middlewares/auth');
-const { validateEmployee, validateUserId } = require('../validators/employeeValidation');
+const { validateEmployee, validateUserId, validateEmployeeUpdate } = require('../validators/employeeValidation');
 
 const router = express.Router();
 
@@ -91,7 +91,7 @@ router.get('/:id', auth.protect, validateUserId, employeeController.getEmployeeB
  *       422:
  *         description: Validation error
  */
-router.put('/:id', auth.protect, auth.restrictTo('admin', 'manager'), validateUserId, validateEmployee, employeeController.updateEmployee);
+router.put('/:id', auth.protect, auth.restrictTo('admin', 'manager'), validateUserId, validateEmployeeUpdate, employeeController.updateEmployee);
 
 /**
  * @swagger
