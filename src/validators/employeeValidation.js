@@ -1,4 +1,4 @@
-const { body, validationResult } = require('express-validator');
+const { body, param, validationResult } = require('express-validator');
 const { StatusCodes } = require('http-status-codes');
 
 const validateEmployee = [
@@ -16,8 +16,8 @@ const validateEmployee = [
 		if (!errors.isEmpty()) {
 			return res.status(StatusCodes.UNPROCESSABLE_ENTITY).json({ errors: errors.array() });
 		}
-		next();
-	}
+		return next();
+	},
 ];
 
 const validateUserId = [
@@ -33,5 +33,5 @@ const validateUserId = [
 
 module.exports = {
 	validateEmployee,
-	validateLogin
+	validateUserId,
 };

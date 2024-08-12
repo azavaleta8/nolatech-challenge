@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const Employee = require('../models/Employee');
 
 function sanitizeUser(user) {
 	const { _id, email, role } = user;
@@ -17,7 +18,13 @@ const UserService = {
 	},
 
 	async loginUser(email, password) {
-		const user = await User.findOne({ email });
+		let user = await User.findOne({ email });
+
+		// Si no se encuentra un usuario, busca un empleado
+		if (!user) {
+			user = await Employee.findOne({ email });
+		}
+
 		if (!user || !(await user.comparePassword(password))) {
 			throw new Error('Invalid credentials');
 		}

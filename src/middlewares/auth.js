@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const { StatusCodes } = require('http-status-codes');
 const User = require('../models/User');
+const Employee = require('../models/Employee');
 
 exports.protect = async (req, res, next) => {
 	try {
@@ -15,7 +16,12 @@ exports.protect = async (req, res, next) => {
 
 		const decoded = jwt.verify(token, process.env.JWT_SECRET || 'secret');
 
-		const currentUser = await User.findById(decoded.userId);
+		let currentUser = await User.findById(decoded.userId);
+
+		if (!currentUser) {
+			currentUser = await Employee.findById(decoded.userId);
+		}
+
 		if (!currentUser) {
 			return res.status(StatusCodes.UNAUTHORIZED).json({ message: 'The user belonging to this token no longer exists.' });
 		}
